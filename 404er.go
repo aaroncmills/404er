@@ -26,7 +26,6 @@ func randomizer(r int) string {
 }
 
 func main() {
-	//create the seed
 	rand.Seed(time.Now().UnixNano())
 
 	fmt.Println("What domain do you wish to 404?")
@@ -39,7 +38,6 @@ func main() {
 	sum := 0
 	for i := 0; i < num; i++ {
 		sum += i
-		//fmt.Println(url + "/" + randomizer(64))
 		var randurl string = url + "/" + randomizer(rand.Intn(128))
 		fmt.Println(randurl)
 
@@ -50,12 +48,5 @@ func main() {
 
 		defer resp.Body.Close()
 
-		//body, err := ioutil.ReadAll(resp.Body)
-		//if err != nil {
-		//	log.Fatalln(err)
-
 	}
 }
-
-//log.Println(string(body))
-//}
