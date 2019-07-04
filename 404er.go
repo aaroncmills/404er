@@ -2,20 +2,12 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"math/rand"
 	"net/http"
 	"time"
 )
 
 var alphanum = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@$^&*()_+-=,.")
-
-func urlinput() {
-	fmt.Println("What domain do you wish to 404?")
-	var url string
-	fmt.Scanln(&url)
-	fmt.Println(url)
-}
 
 func randomizer(r int) string {
 	b := make([]rune, r)
@@ -48,7 +40,7 @@ func main() {
 		var randurl string = url + "/" + randomizer(rand.Intn(128))
 		resp, err := http.Get("http://" + randurl)
 		if err != nil {
-			log.Fatalln(err)
+			fmt.Println(err)
 		}
 		if resp.StatusCode == 404 {
 			failed++
@@ -67,7 +59,7 @@ func main() {
 	percent = ff / nf
 	t := time.Now()
 	elapsed := t.Sub(start)
-	fmt.Println("You had", num, "requests which completed in", elapsed, "seconds. Of those,", failed, "were 404's. You had", success, "valid URL's hit. You had a", percent*100, "%", "404 rate.")
+	fmt.Println("You had", num, "requests which completed in", elapsed, "Of those,", failed, "were 404's. You had", success, "valid URL's hit. You had a", percent*100, "%", "404 rate.")
 	if forbidden > 0 {
 		fmt.Println("You had", forbidden, "403 URL hits. These are worth a closer look...")
 	}
